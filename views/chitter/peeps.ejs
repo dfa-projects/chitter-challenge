@@ -1,0 +1,11 @@
+    <form action="/chitter" method="post" >
+        <input id="new-peep" type="text" name="peep" />
+        <input id="submit-peep" type="submit" value="Peep" />
+    </form>
+    <ul>
+    <% peeps.forEach((peep, index) => { %>
+        <div id="peep-<%= index %>">
+        <li> <%= peep.UserId %> posted at <%= peep.createdAt %><br><h3><%= peep.peep %></h3> </li>
+        </div>
+    <% }) %>
+    </ul>

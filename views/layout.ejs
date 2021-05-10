@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to Chitter</h1>
+    <% if(currentUser){ %>
+        <form action="/sessions?_method=DELETE" method="post">
+		    <input id="sessions-sign-out" type="submit" value="Sign out">
+	    </form>
+    <% } else { %>
+        <a id="signup-link" href="/register/new">Sign up</a>
+	    <a id="login-link" href="/sessions/login">Log in</a>
+        <a id="recent-peeps" href="/chitter/peeps">See recent peeps</a>
+    <% } %>
+    <% if(errors){ %>
+        <p id="errorMessage"> <%= errors %> </p>
+    <% } %>
+    
+    <%- body %>
+</body>
+</html>
