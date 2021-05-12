@@ -24,9 +24,9 @@ module.exports = (on, config) => {
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-const truncateTables = require('../../seeders/db-reset.js');
-const seedDatabase = require('../../seeders/db-seed.js');
-const seedUser = require('../../seeders/db-seedUser');
+const truncateTables = require('../../test/db-reset.js');
+const seedDatabase = require('../../test/db-seed.js');
+const seedUser = require('../../test/db-seedUser');
 
 module.exports = (on, config) => {
   on('task', {

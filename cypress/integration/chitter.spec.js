@@ -1,12 +1,14 @@
 describe('home page', () => {
     beforeEach( () => {
         cy.task('resetDb')
+        cy.task('seedUser')
+        //cy.task('seedDb')
         cy.visit('/');
     });
 
     it('sign up link takes you to sign up page', () => {
-        cy.get('#sign-up-link').click();
-        cy.url().should('include', '/registrations/signup');
+        cy.get('#signup-link').click();
+        cy.url().should('include', '/register/new');
     });
 
     it('log in link takes you to log in page', () => {
@@ -15,7 +17,7 @@ describe('home page', () => {
     });
 
     it('recent peeps link takes you to peeps page', () => {
-        cy.get('#recent-peeps-link').click();
+        cy.get('#recent-peeps').click();
         cy.url().should('include', '/peeps');
     });
 });

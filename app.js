@@ -23,9 +23,23 @@ app.set('view engine', 'ejs')
 const indexController = require('./controllers/index.js');
 const peepsController = require('./controllers/peeps.js');
 const registerController = require('./controllers/register.js');
+const sessionsController = require('./controllers/sessions.js');
 
+const { Users } = require('./models');
+
+app.use(async (req, res, next) => {
+  if (req.session.UserId) {
+    res.locals.currentUser = await Users.findOne({where: { id: req.session.UserId }})
+    console.log(req.session.currentUser)
+  } else {
+    res.locals.currentUser = undefined
+  }
+  res.locals.errors = ['please sign in']
+  next()
+});
 
 app.use('/', indexController);
+app.use('/sessions', sessionsController);
 app.use('/chitter', peepsController);
 app.use('/register', registerController);
 
@@ -33,3 +47,4 @@ app.use('/register', registerController);
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
+

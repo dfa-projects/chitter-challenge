@@ -1,0 +1,25 @@
+<% if (currentUser) { %>
+    <h1>Happy Peeping! :)</h1>
+    <form action="/chitter/peeps" method="post" >
+        <input id="new-peep" type="text" name="peep" />
+        <input id="submit-peep" type="submit" value="Peep" />
+    </form>
+    <ul id="peeps">
+        <% peeps.forEach((peep, index) => { %>  
+            <li id="peep-<%= index %>">  <%= peep.User.username %> posted at <%= peep.createdAt %><br><h3><%= peep.peep %></h3> </li>
+        <% }) %>
+    </ul>
+
+    <form action="/?_method=DELETE" method="post">
+        <input id="signout-button" type="submit" value="Sign out">
+    </form>
+<% } else { %>
+    <ul id="peeps">
+    <% peeps.forEach((peep, index) => { %>  
+        <li id="peep-<%= index %>">  <%= peep.User.username %> posted at <%= peep.createdAt %><br><h3><%= peep.peep %></h3> </li>
+    <% }) %>
+    </ul>
+    <a id="signup-link" href="/register/new">Sign up</a>
+    <a id="login-link" href="/sessions/login">Log in</a>
+<% } %>
+    
