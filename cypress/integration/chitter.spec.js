@@ -1,8 +1,6 @@
 describe('home page', () => {
     beforeEach( () => {
-        cy.task('resetDb')
-        cy.task('seedUser')
-        //cy.task('seedDb')
+        cy.task('resetDb');
         cy.visit('/');
     });
 

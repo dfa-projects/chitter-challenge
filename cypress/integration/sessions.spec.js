@@ -1,7 +1,6 @@
-describe('sessions/login', () => {
+describe('log in page', () => {
     beforeEach( () => {
         cy.task('resetDb');
-        cy.task('seedUser');
         cy.task('seedDb');
         cy.visit('/');
         cy.get('#login-link').click();
@@ -29,4 +28,12 @@ describe('sessions/login', () => {
         cy.url().should('include', '/sessions');
         cy.get('#error').should('contain', 'Incorrect email or password');
     });
+
+    it('can sign out once logged in', () => {
+        cy.get('#email').type('user1@test.com');
+        cy.get('#password').type('test1');
+        cy.get('#submit-login').click();
+        cy.get('#signout-button').click();
+        cy.contains('Welcome to Chitter');
+    })
 });

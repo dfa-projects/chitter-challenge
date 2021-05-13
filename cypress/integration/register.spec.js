@@ -1,7 +1,6 @@
-describe('register/signup', () => {
+describe('sign up page', () => {
     beforeEach( () => {
-        cy.task('resetDb')
-        cy.task('seedDb')
+        cy.task('resetDb');
         cy.visit('/');
         cy.get('#signup-link').click();
     });
@@ -22,11 +21,13 @@ describe('register/signup', () => {
         cy.get('#new-email').type('user@email.com');
         cy.get('#new-submit').click();
         cy.url().should('include', '/register');
-        cy.get('#error').should('contain', 'Please enter a password');
+        cy.on('window:alert',(text) => {
+            expect(text).to.contains('Please fill in this field');
+         });
     });
 
     it('user is automatically logged in after successful sign up', () => {
-        cy.get('#new-username').type('user123')
+        cy.get('#new-username').type('user123');
         cy.get('#new-email').type('test@email.com');
         cy.get('#new-password').type('test');
         cy.get('#new-submit').click();

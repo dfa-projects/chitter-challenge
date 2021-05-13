@@ -26,7 +26,6 @@ module.exports = (on, config) => {
 // eslint-disable-next-line no-unused-vars
 const truncateTables = require('../../test/db-reset.js');
 const seedDatabase = require('../../test/db-seed.js');
-const seedUser = require('../../test/db-seedUser');
 
 module.exports = (on, config) => {
   on('task', {
@@ -39,12 +38,6 @@ module.exports = (on, config) => {
     seedDb() {
       console.log('running seedDb task')
       seedDatabase()
-      return null
-    },
-
-    seedUser() {
-      console.log('running seedUser task')
-      seedUser();
       return null
     }
   })
