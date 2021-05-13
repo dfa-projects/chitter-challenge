@@ -1,22 +1,46 @@
 const db = require('../models');
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
-const hash = bcrypt.hashSync('test', salt);
+const hash1 = bcrypt.hashSync('test1', salt);
+const hash2 = bcrypt.hashSync('test2', salt);
 
 const seedDatabase = async () => {
   console.log('seeding database')
-    await db.Peeps.create({
+
+  const user1 = await db.Users.create({
+      name: 'user',
+      username: 'user1',
+      email: 'user1@test.com',
+      password: hash1,
+      createdAt: new Date('2021', '4', '29', '17', '27'),
+      updatedAt: new Date('2021', '4', '29', '17', '27')
+  })
+
+  await db.Peeps.create({
     peep: 'test peep',
-    createdAt: new Date('2021', '5', '9', '17', '27'),
-    updatedAt: new Date('2021', '5', '9', '17', '27'),
-    Users: {
-      name: 'test',
-      username: 'test123',
-      email: 'test@email.com',
-      password: hash,
-      createdAt: new Date('2021', '5', '9', '17', '27'),
-      updatedAt: new Date('2021', '5', '9', '17', '27')
-    }
+    createdAt: new Date('2021', '4', '29', '17', '27'),
+    updatedAt: new Date('2021', '4', '29', '17', '27'),
+    UserId: user1.id
+  }, {
+    include: [{
+      association: db.Peeps.Users
+    }]
+  });
+
+  const user2 = await db.Users.create({
+    name: 'user',
+    username: 'user2',
+    email: 'user2@test.com',
+    password: hash2,
+    createdAt: new Date('2021', '5', '8', '02', '13'),
+    updatedAt: new Date('2021', '5', '8', '02', '13')
+})
+
+  await db.Peeps.create({
+    peep: 'another test peep',
+    createdAt: new Date('2021', '5', '8', '02', '13'),
+    updatedAt: new Date('2021', '5', '8', '02', '13'),
+    UserId: user2.id
   }, {
     include: [{
       association: db.Peeps.Users

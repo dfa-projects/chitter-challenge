@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.Users = this.belongsTo(models.Users)
     }
+    date() {
+      const date = new Date(this.createdAt)
+      return `${date.getHours()}:${date.getMinutes()} ${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`
+    }
   };
   Peeps.init({
     peep: DataTypes.STRING

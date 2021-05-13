@@ -9,7 +9,6 @@ router.get('/', (req, res) => {
 router.get('/peeps', async (req, res) => {
     const peeps = await Peeps.findAll({include: {all: true}});
     peeps.reverse()
-    console.log(peeps)
     const users = await Users.findAll();
     res.render('chitter/index', {peeps: peeps, users: users, error: []});
 });
@@ -19,7 +18,6 @@ router.post('/peeps', async (req, res) => {
         await Peeps.create({ peep: req.body.peep, UserId: req.session.UserId });
      res.redirect('/chitter/peeps'); 
      } catch (error) {
-         console.log('in error');
          res.locals.errors = error.message
          res.render('register/index', {error: res.locals.errors})
      }

@@ -1,7 +1,6 @@
 describe('register/signup', () => {
     beforeEach( () => {
         cy.task('resetDb')
-        cy.task('seedUser')
         cy.task('seedDb')
         cy.visit('/');
         cy.get('#signup-link').click();
@@ -13,8 +12,8 @@ describe('register/signup', () => {
         cy.get('#new-email').type('user@email');
         cy.get('#new-password').type('password');
         cy.get('#new-submit').click();
-        cy.url().should('include', '/register/new');
-        cy.get('#error').should('contain', 'Invalid email');
+        cy.url().should('include', '/register');
+        cy.get('#error').should('contain', 'Please enter a valid email');
     });
 
     it('displays error if user does not set a password', () => { 
@@ -22,11 +21,12 @@ describe('register/signup', () => {
         cy.get('#new-username').type('user123');
         cy.get('#new-email').type('user@email.com');
         cy.get('#new-submit').click();
-        cy.url().should('include', '/register/new');
-        cy.get('#error').should('contain', 'Password cannot be empty');
+        cy.url().should('include', '/register');
+        cy.get('#error').should('contain', 'Please enter a password');
     });
 
     it('user is automatically logged in after successful sign up', () => {
+        cy.get('#new-username').type('user123')
         cy.get('#new-email').type('test@email.com');
         cy.get('#new-password').type('test');
         cy.get('#new-submit').click();
