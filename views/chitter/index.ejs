@@ -4,21 +4,25 @@
         <input id="new-peep" type="text" name="peep" />
         <input id="submit-peep" type="submit" value="Peep" />
     </form>
+    <div class="peeps-container">
     <ul id="peeps1">
         <% peeps.forEach((peep, index) => { %>  
             <li style="list-style-type: none" id="peep-<%= index %>">  <%= peep.User.username %> posted at <%= peep.date() %><br><h3><%= peep.peep %></h3> </li>
         <% }) %>
     </ul>
+    </div>  
 
     <form action="/?_method=DELETE" method="post">
         <input id="signout-button" type="submit" value="Sign out">
     </form>
 <% } else { %>
+    <div class="peeps-container">
     <ul id="peeps2">
     <% peeps.forEach((peep, index) => { %>  
         <li style="list-style-type: none" id="peep-<%= index %>">  <%= peep.User.username %> posted at <%= peep.date() %><br><h3><%= peep.peep %></h3> </li>
     <% }) %>
     </ul>
+    </div>
     <a id="signup-link" href="/register/new">Sign up</a>
     <a id="login-link" href="/sessions/login">Log in</a>
 <% } %>

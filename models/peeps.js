@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     date() {
       const date = new Date(this.createdAt)
-      return `${date.getHours()}:${date.getMinutes()} ${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`
+      return `${date.getHours()}:${date.getMinutes()} ${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`
     }
   };
   Peeps.init({

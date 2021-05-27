@@ -1,8 +1,8 @@
 describe('peeps page', () => {
     beforeEach( () => {
         cy.task('resetDb');
-        cy.task('seedDb');
         cy.visit('/');
+        cy.task('seedDb');
     });
 
     it('can see others\' peeps when not logged in', () => {
@@ -12,7 +12,7 @@ describe('peeps page', () => {
 
     it('displays peeps with date and user handle', () => {
         cy.get('#recent-peeps').click();
-        cy.get('#peep-0').should('contain', 'user1 posted at 17:27 29-4-2021');
+        cy.get('#peep-0').should('contain', 'user1 posted at 17:27 29-5-2021');
         cy.get('#peep-0').should('contain', 'test peep');
     });
 

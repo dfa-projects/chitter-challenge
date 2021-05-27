@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+app.use(express.static('public'));
 const session = require('express-session');
 const expressLayouts = require('express-ejs-layouts');
 app.use(express.urlencoded({ extended: true }));
@@ -30,7 +31,6 @@ const { Users } = require('./models');
 app.use(async (req, res, next) => {
   if (req.session.UserId) {
     res.locals.currentUser = await Users.findOne({where: { id: req.session.UserId }})
-    console.log(req.session.currentUser)
   } else {
     res.locals.currentUser = undefined
   }

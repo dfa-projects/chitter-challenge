@@ -9,7 +9,7 @@ router.get('/new', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-	const peeps = await Peeps.findAll();
+	await Peeps.findAll();
     try {
 		const hash = bcrypt.hashSync(req.body.password, salt);
 		const user = await Users.create({

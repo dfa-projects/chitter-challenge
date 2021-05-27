@@ -31,8 +31,8 @@ describe('sign up page', () => {
         cy.get('#new-email').type('test@email.com');
         cy.get('#new-password').type('test');
         cy.get('#new-submit').click();
-        cy.get('#new-peep').type('this should work');
+        cy.get('#new-peep').type('yo');
         cy.get('#submit-peep').click();
-        cy.get('#peep-0').should('contain', 'this should work');
+        cy.get('#peep-0').should('contain', 'yo');
     });
 });

@@ -1,10 +1,22 @@
 Chitter Challenge
 =================
+### Instructions
+Fork this repo, avigate to your chosen directory and clone from your terminal
+```
+git clone git@github.com:hanna-98/chitter-challenge.git
+```
+Install dependencies 
+```
+npm install
+```
+
+### Technologies
+This app was created using express and ejs. 
+
 ### User journey
 ![screenshot](images/chitter-user-journey.png)
 ### Mockup
 ![screenshot](images/chitter.png)
-
 
 ### Standard Acceptance Criteria
 ```
