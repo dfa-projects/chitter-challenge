@@ -1,67 +1,55 @@
 Chitter Challenge
 =================
-### Instructions
+Chitter is a small Twitter clone that allows users to post messages to a public wall.
+
+## Technologies
+This app was created using [Express](https://expressjs.com/) and [EJs](https://ejs.co/). The database is managed with [Postgres](https://www.postgresql.org/) and uses the ORM [Sequelize](https://sequelize.org/). Tests have been written and run using [Cypress](https://www.cypress.io/).
+
+## Instructions
 Fork this repo, avigate to your chosen directory and clone from your terminal
-```
+```bash
 git clone git@github.com:hanna-98/chitter-challenge.git
 ```
 Install dependencies 
 ```
 npm install
 ```
+Create a .env file and add these ennvironment variables:
+```bash
+# be sure not to include spaces
+DATABASE='your database name'
+DATABASE_USER='your postgres username'
+DATABASE_PASSWORD='your postgres password if you have one'
+SESSIONS_SECRET='choose a password for sessions'
+```
+Create and migrate development and test databases
+```
+npx sequelize-cli db:create
+npx sequelize-cli db:migrate
+NODE_ENV=test npx sequelize-cli db:create
+NODE_ENV=test npx sequelize-cli db:migrate
+```
+Start the Postgres server 
+```bash
+pg_ctl -D /usr/local/var/postgres start
+```
+To run the app:
+```bash
+node app.js
+# or
+npx nodemon app.js
+```
+To run the tests:
+```bash
+# start the app in the test environment 
+NODE_ENV=test npx nodemon app.js
+# then open cypress
+NODE_ENV=test npx cypress open
+```
 
-### Technologies
-This app was created using express and ejs. 
-
-### User journey
+## User journey
 ![screenshot](images/chitter-user-journey.png)
-### Mockup
+## Mockup
 ![screenshot](images/chitter.png)
 
-### Standard Acceptance Criteria
-```
-As a trainee software engineer
-So that I can let people know what I am doing  
-I want to post a message (peep) to chitter
 
-As a trainee
-So that I can see what others are saying  
-I want to see all peeps in reverse chronological order
-
-As a trainee
-So that I can better appreciate the context of a peep
-I want to see the time at which it was made
-
-As a trainee
-So that I can post messages on Chitter as me
-I want to sign up for Chitter
-
-As a trainee
-So that only I can post messages on Chitter as me
-I want to log in to Chitter
-
-As a trainee
-So that I can avoid others posting messages on Chitter as me
-I want to log out of Chitter
-```
-
-Additional requirements:
-------
-
-* You don't have to be logged in to see the peeps.
-* Trainee software engineers sign up to chitter with their email, password, name and a username (e.g. ewithers@digitalfutures.com, password123, Edward Withers, dearshrewdwit).
-* The username and email are unique.
-* Peeps (posts to chitter) have the name of the trainee and their user handle.
-* Your README should indicate the technologies used, and give instructions on how to install and run the tests.
-
-### Extended Acceptance Criteria
-
-```
-As a trainee
-So that I can stay constantly tapped in to the shouty box of Chitter
-I want to receive an email if I am tagged in a Peep
-
-As a trainee
-In order to start a conversation as a DFA trainee Software Engineer
-I want to reply to a peep from another trainee.
-```
